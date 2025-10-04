@@ -1,0 +1,1 @@
+YOLOv5 pipeline helper files. Use convert_labels_to_yolo.py to prepare dataset, then run train_yolov5.sh (requires ultralytics/yolov5 repo).

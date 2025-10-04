@@ -1,0 +1,4 @@
+train: /workspace/datasets/leo/images/train
+val: /workspace/datasets/leo/images/val
+nc: 1
+names: ['satellite']

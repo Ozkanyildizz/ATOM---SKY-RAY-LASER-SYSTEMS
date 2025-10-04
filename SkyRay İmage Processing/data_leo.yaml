@@ -1,0 +1,4 @@
+train: C:\yolo_dataset/train/images 
+val:  C:\yolo_dataset/val/images 
+nc: 1
+names: ['satellite']
