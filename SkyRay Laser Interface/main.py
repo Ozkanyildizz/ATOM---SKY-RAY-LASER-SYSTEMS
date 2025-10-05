@@ -63,25 +63,25 @@ class MainMenu(ctk.CTkFrame):
         # Status Label
         ctk.CTkLabel(right_frame, text="SYSTEM STATUS", font=ctk.CTkFont(weight="bold", size=18)).place(relx=0.07, rely=0.23)
         
-#         current_status_text = ctk.CTkLabel(right_frame, text="""
-# Date/Time: 01.07.2025 12:00
-# Connection: ACTIVE (Uplink/Downlink)
-# Mode: AUTONOMOUS FLIGHT
-# Target Lock: Object ID-42
-# Laser Status: READY / FIRING / COOLING
-# """, justify=ctk.LEFT, text_color="#00ffff")
-#         current_status_text.place(relx=0.07, rely=0.26)
-
-        current_status_text2 = ctk.CTkLabel(right_frame, text="""
-Date/Time: 05.10.2025 (00:02:15)
-Section: ACTIVE (Laser Link / RF Backup)
-Mode: AUTONOMOUS / LINK
-Target Lock: Object ID: KH-04
-Coordinates: LAT: 41.0562 N, LON: 29.0068
-SIGNAL STATUS: LOCK ESTABLISHED / STEADY
-DATA RATE: 1.2 GBPS / NOMINAL
+        current_status_text = ctk.CTkLabel(right_frame, text="""
+Date/Time: 01.07.2025 12:00
+Connection: ACTIVE (Uplink/Downlink)
+Mode: AUTONOMOUS FLIGHT
+Target Lock: Object ID-42
+Laser Status: READY / FIRING / COOLING
 """, justify=ctk.LEFT, text_color="#00ffff")
-        current_status_text2.place(relx=0.07, rely=0.26)
+        current_status_text.place(relx=0.07, rely=0.26)
+
+#         current_status_text2 = ctk.CTkLabel(right_frame, text="""
+# Date/Time: 05.10.2025 (00:02:15)
+# Section: ACTIVE (Laser Link / RF Backup)
+# Mode: AUTONOMOUS / LINK
+# Target Lock: Object ID: KH-04
+# Coordinates: LAT: 41.0562 N, LON: 29.0068
+# SIGNAL STATUS: LOCK ESTABLISHED / STEADY
+# DATA RATE: 1.2 GBPS / NOMINAL
+# """, justify=ctk.LEFT, text_color="#00ffff")
+        # current_status_text2.place(relx=0.07, rely=0.26)
 
 
         # Event Log Header
@@ -105,14 +105,14 @@ DATA RATE: 1.2 GBPS / NOMINAL
 [12:08:30] [SYS] All systems operating within safe parameters
 """
         log_text2 = """
-[00:01:05] [BMS]  Target Lock: Object ID-KH-04 confirmed (41.0562 N, 29.0068 E).  
-[00:01:20] [GPW]  RF Exciter Activated (Manual) — Carrier Lock: 2.4 GHz.  
-[00:01:30] [BMS]  RF Link Established with GS-1. SNR: 15 dB.  
-[00:01:50] [LSR]  Link Protocol: QPSK/FEC. BER: Nominal.  
-[00:02:00] [LSR]  Power Transmission Initiated to KH-04.  
-[00:02:15] [SYS]  Status: Stable. Power Output: 85%. Temp: 45°C. 
+[00:01:05] [BMS] Target Lock: Object ID-KH-04 (41.0562 N, 29.0068 E) Confirmed.  
+[00:01:20] [GPW] Laser Power Transmission Initiated (Manual). Beam Frequency Lock Achieved.  
+[00:01:30] [BMS] Power Link Established with Ground Station GS-1. Transfer Efficiency: 85%.  
+[00:01:50] [LSR] Beam Stability Nominal. Atmospheric Attenuation: 0.12 dB/km.  
+[00:02:15] [SYS] System Health Check: All parameters within safe limits. Temperature: 45°C, Power Levels: Optimal.  
+
  """
-        info_textbox.insert("0.0", log_text2)
+        info_textbox.insert("0.0", log_text)
         info_textbox.configure(state="disabled")
 
         # --- RIGHT PANEL CONTROL BUTTONS ---
@@ -122,7 +122,7 @@ DATA RATE: 1.2 GBPS / NOMINAL
                                  text_color="white")
         button_stop.place(relx=0.07, rely=0.76, relheight=0.1, relwidth=0.86,)
 
-        button_ignition = ctk.CTkButton(right_frame, text="SYSTEM ARM (Ignition)",
+        button_ignition = ctk.CTkButton(right_frame, text=" START İGNİTİON",
                                  fg_color="#0a7a2a", 
                                  hover_color="#0a9a10")
         button_ignition.place(relx=0.07, rely=0.87, relheight=0.1, relwidth = 0.86,)
@@ -133,7 +133,7 @@ DATA RATE: 1.2 GBPS / NOMINAL
         try:
             # Image loading
             base_path = os.path.dirname(__file__)
-            pil_image = Image.open(os.path.join(base_path, "docs", "istanbul-satellite.png"))
+            pil_image = Image.open(os.path.join(base_path, "docs", "satellite.png"))
         #     pil_image = Image.open("docs/istanbul-satellite.png") # Update image path
             ctk_image = CTkImage(light_image=pil_image, size=(800, 700))
             image_label = ctk.CTkLabel(left_frame, image=ctk_image, text="")
@@ -157,7 +157,7 @@ DATA RATE: 1.2 GBPS / NOMINAL
         
         # Buttons
         ctk.CTkButton(debris_removal_frame, text="Autonomous Target Lock", fg_color="#4f4f6e").grid(row=1, column=0, padx=10, pady=5, sticky="ew")
-        ctk.CTkButton(debris_removal_frame, text="Fire Laser (Manual)", fg_color="#2a7a4a").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
+        ctk.CTkButton(debris_removal_frame, text="Fire Laser (Manual)", fg_color="#e53935").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
         ctk.CTkButton(debris_removal_frame, text="Stop Disposal Protocol", fg_color="#4f4f6e").grid(row=3, column=0, padx=10, pady=5, sticky="ew")
         
         # ------------------------------------------------------------------
@@ -191,7 +191,7 @@ DATA RATE: 1.2 GBPS / NOMINAL
 
         # Buttons
         ctk.CTkButton(ground_station_power_frame, text="Initiate Target Lock", fg_color="#4f4f6e").grid(row=1, column=0, padx=10, pady=5, sticky="ew")
-        ctk.CTkButton(ground_station_power_frame, text="Initiate Power Beam (Manuel)", fg_color="#e53935").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
+        ctk.CTkButton(ground_station_power_frame, text="Initiate Power Beam (Manuel)", fg_color="#2a7a4a").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
         ctk.CTkButton(ground_station_power_frame, text="Stop the power transmission", fg_color="#4f4f6e").grid(row=3, column=0, padx=10, pady=5, sticky="ew")
 
     

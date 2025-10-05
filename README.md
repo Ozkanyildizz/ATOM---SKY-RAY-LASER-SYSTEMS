@@ -22,7 +22,7 @@ This repository contains a few top-level folders used by the projec:
 - `SkyRay İmage Processing` — image processing and pipelines (label conversion, training helpers).  
 - `SkyRay İmages` — example / dataset images and assets.  
 
-**Logo file:** `SkyRay Laser Interface/docs/logo.png` — used in the README header. :contentReference[oaicite:2]{index=2}
+
 
 ---
 
