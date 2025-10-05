@@ -49,7 +49,11 @@ class MainMenu(ctk.CTkFrame):
         # ------------------------------------------------------------------
         
         # Logo Label
-        pil_image = Image.open("docs/logo.png")
+        # pil_image = Image.open("docs/logo.png")
+        import os
+        base_path = os.path.dirname(__file__)
+        pil_image = Image.open(os.path.join(base_path, "docs", "logo.png"))
+
         resized_pil_image = pil_image.resize((500, 250))
         ctk_image = ctk.CTkImage(light_image=resized_pil_image, 
                          dark_image=resized_pil_image, # Use the same image for both modes
@@ -69,13 +73,13 @@ class MainMenu(ctk.CTkFrame):
 #         current_status_text.place(relx=0.07, rely=0.26)
 
         current_status_text2 = ctk.CTkLabel(right_frame, text="""
-Date/Time:	05.10.2025 (00:02:15)
-Section:	ACTIVE (GPW Power Transfer)
-Mode:	AUTONOMOUS / TRACK
-Target Lock	Object ID: KH-04 
-Coordinates	LAT: 41.0562 N, LON: 29.0068 
-Power System:	TRANSFER INITIATED / STEADY
-Laser Status:	POWER BEAM ACTIVE
+Date/Time: 05.10.2025 (00:02:15)
+Section: ACTIVE (Laser Link / RF Backup)
+Mode: AUTONOMOUS / LINK
+Target Lock: Object ID: KH-04
+Coordinates: LAT: 41.0562 N, LON: 29.0068
+SIGNAL STATUS: LOCK ESTABLISHED / STEADY
+DATA RATE: 1.2 GBPS / NOMINAL
 """, justify=ctk.LEFT, text_color="#00ffff")
         current_status_text2.place(relx=0.07, rely=0.26)
 
@@ -101,13 +105,12 @@ Laser Status:	POWER BEAM ACTIVE
 [12:08:30] [SYS] All systems operating within safe parameters
 """
         log_text2 = """
-[00:01:05] [BMS]	Target Lock: Object ID-KH-04 (41.0562 N, 29.0068 E) Confirmed.
-[00:01:20] [GPW]	Ground Station Power Initiated (Manual). Power Beam Incoming.
-[00:01:30] [BMS]	Energy Lock Acquired with Ground Station 1 (GS-1). System Energy Level: 100%.
-[00:01:50] [LSR]	Power Beam Firing Solution Approved. Beam Integrity Nominal.
-[00:02:00] [LSR]	INITIATE POWER TRANSMISSION TO KH-04. 
-[00:02:15] [OPR]	Power Beam Status: Active and Stable. Target Energy Level: 30% (Increasing).
-[00:02:15] [BMS]	All subsystems Nominal and operating within safe transfer parameters.
+[00:01:05] [BMS]  Target Lock: Object ID-KH-04 confirmed (41.0562 N, 29.0068 E).  
+[00:01:20] [GPW]  RF Exciter Activated (Manual) — Carrier Lock: 2.4 GHz.  
+[00:01:30] [BMS]  RF Link Established with GS-1. SNR: 15 dB.  
+[00:01:50] [LSR]  Link Protocol: QPSK/FEC. BER: Nominal.  
+[00:02:00] [LSR]  Power Transmission Initiated to KH-04.  
+[00:02:15] [SYS]  Status: Stable. Power Output: 85%. Temp: 45°C. 
  """
         info_textbox.insert("0.0", log_text2)
         info_textbox.configure(state="disabled")
@@ -129,7 +132,9 @@ Laser Status:	POWER BEAM ACTIVE
         # ------------------------------------------------------------------
         try:
             # Image loading
-            pil_image = Image.open("docs/istanbul-satellite.png") # Update image path
+            base_path = os.path.dirname(__file__)
+            pil_image = Image.open(os.path.join(base_path, "docs", "istanbul-satellite.png"))
+        #     pil_image = Image.open("docs/istanbul-satellite.png") # Update image path
             ctk_image = CTkImage(light_image=pil_image, size=(800, 700))
             image_label = ctk.CTkLabel(left_frame, image=ctk_image, text="")
             image_label.place(relx=0.15, rely=0.02, relwidth=0.7, relheight=0.5)
@@ -180,12 +185,12 @@ Laser Status:	POWER BEAM ACTIVE
         ground_station_power_frame.place(relx=0.69,rely=0.6,relwidth=0.3,relheight=0.3)
         ground_station_power_frame.grid_columnconfigure(0, weight=1)
 
-        ctk.CTkLabel(ground_station_power_frame, text="GROUND STATION (GPW) CONTROL",
+        ctk.CTkLabel(ground_station_power_frame, text="GROUND STATION (GPW) \nPOWER TRANSMİSSİON",
                              font=ctk.CTkFont(weight="bold", size=10),
                              corner_radius=50).grid(row=0, column=0, pady=14, sticky="ew")
 
         # Buttons
-        ctk.CTkButton(ground_station_power_frame, text="Start Target Tracking", fg_color="#4f4f6e").grid(row=1, column=0, padx=10, pady=5, sticky="ew")
+        ctk.CTkButton(ground_station_power_frame, text="Initiate Target Lock", fg_color="#4f4f6e").grid(row=1, column=0, padx=10, pady=5, sticky="ew")
         ctk.CTkButton(ground_station_power_frame, text="Initiate Power Beam (Manuel)", fg_color="#e53935").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
         ctk.CTkButton(ground_station_power_frame, text="Stop the power transmission", fg_color="#4f4f6e").grid(row=3, column=0, padx=10, pady=5, sticky="ew")
 
