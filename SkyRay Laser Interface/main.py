@@ -65,10 +65,10 @@ class MainMenu(ctk.CTkFrame):
         
         current_status_text = ctk.CTkLabel(right_frame, text="""
 Date/Time: 01.07.2025 12:00
-Connection: ACTIVE (Uplink/Downlink)
+Connection: SPW ACTIVE 
 Mode: AUTONOMOUS FLIGHT
 Target Lock: Object ID-42
-Laser Status: READY / FIRING / COOLING
+Laser Status: READY POWER TRANSMİSSİON
 """, justify=ctk.LEFT, text_color="#00ffff")
         current_status_text.place(relx=0.07, rely=0.26)
 
@@ -112,7 +112,13 @@ Laser Status: READY / FIRING / COOLING
 [00:02:15] [SYS] System Health Check: All parameters within safe limits. Temperature: 45°C, Power Levels: Optimal.  
 
  """
-        info_textbox.insert("0.0", log_text)
+        log_text3 = """
+[00:00:05] [SYS] System Boot Initiated. All systems nominal.
+[00:00:15] [BMS] Battery Status: 100% (Fully Charged)
+[00:00:30] [NAV] GPS Lock Acquired. Coordinates: 41.0562 N, 29.0068 E
+[00:00:45] [COM] Communication Link Established with Ground Station GS-1    
+[00:01:00] [SPW] Target Lock: ENERGY IS BEING TRANSFERRED."""
+        info_textbox.insert("0.0", log_text3)
         info_textbox.configure(state="disabled")
 
         # --- RIGHT PANEL CONTROL BUTTONS ---
@@ -133,7 +139,7 @@ Laser Status: READY / FIRING / COOLING
         try:
             # Image loading
             base_path = os.path.dirname(__file__)
-            pil_image = Image.open(os.path.join(base_path, "docs", "satellite.png"))
+            pil_image = Image.open(os.path.join(base_path, "docs", "Energy_transfer.jpg"))
         #     pil_image = Image.open("docs/istanbul-satellite.png") # Update image path
             ctk_image = CTkImage(light_image=pil_image, size=(800, 700))
             image_label = ctk.CTkLabel(left_frame, image=ctk_image, text="")
@@ -157,7 +163,7 @@ Laser Status: READY / FIRING / COOLING
         
         # Buttons
         ctk.CTkButton(debris_removal_frame, text="Autonomous Target Lock", fg_color="#4f4f6e").grid(row=1, column=0, padx=10, pady=5, sticky="ew")
-        ctk.CTkButton(debris_removal_frame, text="Fire Laser (Manual)", fg_color="#e53935").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
+        ctk.CTkButton(debris_removal_frame, text="Fire Laser (Manual)", fg_color="#2a7a4a").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
         ctk.CTkButton(debris_removal_frame, text="Stop Disposal Protocol", fg_color="#4f4f6e").grid(row=3, column=0, padx=10, pady=5, sticky="ew")
         
         # ------------------------------------------------------------------
@@ -173,7 +179,7 @@ Laser Status: READY / FIRING / COOLING
 
         # Buttons
         ctk.CTkButton(satellite_power_frame, text="Autonomous Pairing Mode", fg_color="#4f4f6e").grid(row=1, column=0, padx=10, pady=5, sticky="ew")
-        ctk.CTkButton(satellite_power_frame, text="Initiate Power Beam (Manuel)", fg_color="#2a7a4a").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
+        ctk.CTkButton(satellite_power_frame, text="Initiate Power Beam (Manuel)", fg_color="#e53935").grid(row=2, column=0, padx=10, pady=5, sticky="ew")
         ctk.CTkButton(satellite_power_frame, text="Stop the power transmission", fg_color="#4f4f6e").grid(row=3, column=0, padx=10, pady=5, sticky="ew")
         
         # ------------------------------------------------------------------
